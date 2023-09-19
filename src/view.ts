@@ -31,7 +31,7 @@ const makeNext = <T>(value: T): Next<T> => fArray(() => value, 2);
 export const parseNext = (s: string, defaultCell: AbstractCell) => {
   const next = makeNext(defaultCell);
 
-  for (const [idx, c] of abstractCells(s).slice(0, 4).entries()) {
+  for (const [idx, c] of abstractCells(s).slice(0, next.length).entries()) {
     next[idx] = c;
   }
 
@@ -41,7 +41,7 @@ export const parseNext = (s: string, defaultCell: AbstractCell) => {
 const parseRow = (s: string, defaultCell: AbstractCell) => {
   const row = makeRow(defaultCell);
 
-  for (const [idx, c] of abstractCells(s).slice(0, 6).entries()) {
+  for (const [idx, c] of abstractCells(s).slice(0, row.length).entries()) {
     row[idx] = c;
   }
 
@@ -52,7 +52,11 @@ export const parseBoard = (s: string, defaultCell: AbstractCell) => {
   const board = makeBoard(defaultCell);
 
   // 下から読む
-  for (const [idx, line] of s.split("\n").reverse().slice(0, 12).entries()) {
+  for (const [idx, line] of s
+    .split("\n")
+    .reverse()
+    .slice(0, board.length)
+    .entries()) {
     board[board.length - 1 - idx] = parseRow(line, defaultCell);
   }
 
