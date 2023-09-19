@@ -1,0 +1,63 @@
+.card {
+  font-family: arial;
+  font-size: 20px;
+  text-align: center;
+  color: black;
+  background-color: white;
+}
+
+.red {
+  background: red;
+}
+
+.yellow {
+  background: yellow;
+}
+
+.green {
+  background: green;
+}
+
+.blue {
+  background: blue;
+}
+
+.purple {
+  background: purple;
+}
+
+.gray {
+  background: gray;
+}
+
+.empty {
+  background: transparent;
+}
+
+.src {
+  display: none;
+}
+
+.view {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  gap: 4px;
+}
+
+.board {
+  border: solid 2px black;
+}
+
+.next1 {
+  border: solid 2px black;
+}
+
+.next2 {
+  border: solid 2px black;
+}
+
+td {
+  width: 16px;
+  height: 16px;
+}
