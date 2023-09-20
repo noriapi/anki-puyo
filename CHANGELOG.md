@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.4.0](https://github.com/noriapi/anki-puyo/compare/v0.3.2...v0.4.0) (2023-09-20)
+
+
+### Features
+
+* **style:** レイアウトを変更 ([#19](https://github.com/noriapi/anki-puyo/issues/19)) ([63c03f3](https://github.com/noriapi/anki-puyo/commit/63c03f339eb4ccfb020d981436997b217f94468d))
+
+
+### Bug Fixes
+
+* &lt;br&gt; タグが一つしか置換されない問題を修正 ([#24](https://github.com/noriapi/anki-puyo/issues/24)) ([91323c8](https://github.com/noriapi/anki-puyo/commit/91323c804601f9d9cb42a9e93e0050aff6b36bc4))
+
 ## [0.3.2](https://github.com/noriapi/anki-puyo/compare/v0.3.1...v0.3.2) (2023-09-20)
 
 
