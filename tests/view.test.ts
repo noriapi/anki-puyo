@@ -25,16 +25,49 @@ test("parseNext", () => {
   expect(parseNext(" A", cell(" "))).toStrictEqual(cells([" ", "A"]));
 });
 
-test("parseNextList", () => {
-  expect(parseNextList("ABCD", cell(" "))).toStrictEqual([
-    cells(["A", "B"]),
-    cells(["C", "D"]),
-  ]);
+describe("parseNextList", () => {
+  test.each([
+    {
+      s: "ABCD",
+      defaultCell: cell(" "),
+      expected: [cells(["A", "B"]), cells(["C", "D"])],
+    },
 
-  expect(parseNextList("ABC ", cell(" "))).toStrictEqual([
-    cells(["A", "B"]),
-    cells(["C", " "]),
-  ]);
+    {
+      s: "ABC ",
+      defaultCell: cell(" "),
+      expected: [cells(["A", "B"]), cells(["C", " "])],
+    },
+
+    {
+      s: "AB\nCD",
+      defaultCell: cell(" "),
+      expected: [cells(["A", "B"]), cells(["C", "D"])],
+    },
+
+    {
+      s: "A \nCD",
+      defaultCell: cell(" "),
+      expected: [cells(["A", " "]), cells(["C", "D"])],
+    },
+
+    {
+      s: "A \n D",
+      defaultCell: cell(" "),
+      expected: [cells(["A", " "]), cells([" ", "D"])],
+    },
+
+    {
+      s: "A\n D",
+      defaultCell: cell(" "),
+      expected: [cells(["A", " "]), cells(["D", " "])],
+    },
+  ])(
+    "parseNextList($s, $defaultCell) -> $expected",
+    ({ s, defaultCell, expected }) => {
+      expect(parseNextList(s, defaultCell)).toStrictEqual(expected);
+    }
+  );
 });
 
 describe("parseBoard", () => {
