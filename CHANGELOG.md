@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.2](https://github.com/noriapi/anki-puyo/compare/v0.3.1...v0.3.2) (2023-09-20)
+
+
+### Bug Fixes
+
+* **view:** null エラーを修正 ([#17](https://github.com/noriapi/anki-puyo/issues/17)) ([ea370cd](https://github.com/noriapi/anki-puyo/commit/ea370cdeed504ce24b9661d8f3b0d08a0fa0df5c))
+
 ## [0.3.1](https://github.com/noriapi/anki-puyo/compare/v0.3.0...v0.3.1) (2023-09-20)
 
 
