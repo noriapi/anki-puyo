@@ -27,11 +27,11 @@ const getData = () => {
   const boardSrc =
     document
       .querySelector<HTMLDivElement>("#front-board-src")
-      ?.innerHTML.replace("<br>", "\n") ?? "";
+      ?.innerHTML.replaceAll("<br>", "\n") ?? "";
   const nextSrc =
     document
       .querySelector<HTMLDivElement>("#front-next-src")
-      ?.innerHTML.replace("<br>", "\n") ?? "";
+      ?.innerHTML.replaceAll("<br>", "\n") ?? "";
 
   return parseData(boardSrc, nextSrc, window.DEFAULT_CELL as AbstractCell);
 };
