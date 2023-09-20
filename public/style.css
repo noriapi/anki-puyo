@@ -39,21 +39,25 @@
 
 .view {
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items: start;
   gap: 4px;
+  padding: 16px;
 }
 
 .board {
   border: solid 2px black;
+  flex: none;
 }
 
 .next1 {
   border: solid 2px black;
+  flex: none;
 }
 
 .next2 {
   border: solid 2px black;
+  flex: none;
 }
 
 .msg {
