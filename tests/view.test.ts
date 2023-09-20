@@ -108,8 +108,7 @@ test("cellsSet", () => {
       ["B", "B", "A", "C", "C", "A"],
       ["A", "A", "C", "A", "A", "B"],
     ]),
-    next1: cells(["A", "A"]),
-    next2: cells(["B", "_"]),
+    nexts: [cells(["A", "A"]), cells(["B", "_"])],
   };
   const set = cellsSet(data);
   expect(set).toStrictEqual(new Set(["A", "B", "C", "X", " ", "_"]));
@@ -143,8 +142,7 @@ describe("materializeDataRandom", () => {
         ["B", "B", "A", "C", "C", "A"],
         ["A", "A", "C", "A", "A", "B"],
       ]),
-      next1: cells(["A", "A"]),
-      next2: cells(["B", "_"]),
+      nexts: [cells(["A", "A"]), cells(["B", "_"])],
     };
     const map: TagMap = new Map([
       [cell(" "), "empty"],
