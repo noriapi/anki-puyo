@@ -1,10 +1,9 @@
 import base from "./vite.config.base";
 
-import { defineConfig } from "vite";
+import { mergeConfig } from "vite";
 import { resolve } from "path";
 
-export default defineConfig({
-  ...base,
+export default mergeConfig(base, {
   build: {
     rollupOptions: {
       input: {

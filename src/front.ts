@@ -8,11 +8,16 @@ import {
   tagMapFromObj,
 } from "./view";
 
-const RANDOM_TAGS = ["red", "yellow", "green", "blue", "purple"];
+//! 変換先の CSS タグ名と変換元の文字のリストのレコード
 const FIXED_CELLS = {
   empty: [" ", "_"],
   gray: ["X"],
 } as unknown as Record<string, AbstractCell[]>;
+
+//! ランダムに選択される CSS タグのリスト
+const RANDOM_TAGS = ["red", "yellow", "green", "blue", "purple"];
+
+//! 未指定のセルにあてがう文字
 const DEFAULT_CELL = " ";
 
 window.RANDOM_TAGS = RANDOM_TAGS;
