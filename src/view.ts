@@ -80,10 +80,12 @@ export type MaterialData = Data<string>;
 
 export const parseData = (
   boardSrc: string,
-  next1Src: string,
-  next2Src: string,
+  nextSrc: string,
   defaultCell: AbstractCell
 ): AbstractData => {
+  const next1Src = nextSrc.slice(0, 2);
+  const next2Src = nextSrc.slice(2, undefined);
+
   return {
     board: parseBoard(boardSrc, defaultCell),
     next1: parseNext(next1Src, defaultCell),
