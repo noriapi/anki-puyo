@@ -1,34 +1,7 @@
-import {
-  AbstractCell,
-  AbstractData,
-  drawMaterial,
-  materializeDataRandom,
-  parseData,
-} from "./view";
-
-const getData = () => {
-  const boardSrc =
-    document
-      .querySelector<HTMLDivElement>("#back-board-src")
-      ?.innerHTML.replaceAll("<br>", "\n") ?? "";
-  const nextSrc =
-    document
-      .querySelector<HTMLDivElement>("#back-next-src")
-      ?.innerHTML.replaceAll("<br>", "\n") ?? "";
-
-  return parseData(boardSrc, nextSrc, window.DEFAULT_CELL as AbstractCell);
-};
-
-const materializeRandom = (data: AbstractData) => {
-  const map = window.materialMap;
-  const mapTags = new Set(map.values());
-  const options = window.RANDOM_TAGS.filter((tag) => !mapTags.has(tag));
-
-  return materializeDataRandom(data, map, new Set(options));
-};
+import { drawMaterial } from "./view";
 
 const drawFront = () => {
-  const data = window.materialData;
+  const data = window.frontMaterialData;
 
   const boardEl = document.querySelector<HTMLTableElement>("#front-board")!;
   const next1El = document.querySelector<HTMLTableElement>("#front-next1")!;
@@ -41,21 +14,23 @@ const drawFront = () => {
   });
 };
 
-const main = () => {
-  drawFront();
-
-  const data = getData();
-  const [materialData, _] = materializeRandom(data);
+const drawBack = () => {
+  const data = window.backMaterialData;
 
   const boardEl = document.querySelector<HTMLTableElement>("#back-board")!;
   const next1El = document.querySelector<HTMLTableElement>("#back-next1")!;
   const next2El = document.querySelector<HTMLTableElement>("#back-next2")!;
 
-  drawMaterial(materialData, {
+  drawMaterial(data, {
     board: (col, row) => boardEl.rows[row].cells[col],
     next1: (num) => next1El.rows[num].cells[0],
     next2: (num) => next2El.rows[num].cells[0],
   });
+};
+
+const main = () => {
+  drawFront();
+  drawBack();
 };
 
 main();
