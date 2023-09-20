@@ -23,21 +23,12 @@ const getData = () => {
     document
       .querySelector<HTMLDivElement>("#front-board-src")
       ?.innerHTML.replace("<br>", "\n") ?? "";
-  const next1Src =
+  const nextSrc =
     document
-      .querySelector<HTMLDivElement>("#front-next1-src")
-      ?.innerHTML.replace("<br>", "\n") ?? "";
-  const next2Src =
-    document
-      .querySelector<HTMLDivElement>("#front-next2-src")
+      .querySelector<HTMLDivElement>("#front-next-src")
       ?.innerHTML.replace("<br>", "\n") ?? "";
 
-  return parseData(
-    boardSrc,
-    next1Src,
-    next2Src,
-    window.DEFAULT_CELL as AbstractCell
-  );
+  return parseData(boardSrc, nextSrc, window.DEFAULT_CELL as AbstractCell);
 };
 
 const materializeRandom = (data: AbstractData) => {
