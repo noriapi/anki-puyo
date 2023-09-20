@@ -9,6 +9,7 @@ import {
   materializeDataRandom,
   parseBoard,
   parseNext,
+  parseNextList,
 } from "../src/view";
 import { FixedLengthArray } from "type-fest";
 
@@ -22,6 +23,18 @@ test("parseNext", () => {
   expect(parseNext("", cell("A"))).toStrictEqual(cells(["A", "A"]));
   expect(parseNext("A", cell(" "))).toStrictEqual(cells(["A", " "]));
   expect(parseNext(" A", cell(" "))).toStrictEqual(cells([" ", "A"]));
+});
+
+test("parseNextList", () => {
+  expect(parseNextList("ABCD", cell(" "))).toStrictEqual([
+    cells(["A", "B"]),
+    cells(["C", "D"]),
+  ]);
+
+  expect(parseNextList("ABC ", cell(" "))).toStrictEqual([
+    cells(["A", "B"]),
+    cells(["C", " "]),
+  ]);
 });
 
 describe("parseBoard", () => {
