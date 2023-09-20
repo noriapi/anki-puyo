@@ -23,7 +23,7 @@ const DEFAULT_CELL = " ";
 window.RANDOM_TAGS = RANDOM_TAGS;
 window.DEFAULT_CELL = DEFAULT_CELL;
 
-const getData = () => {
+const getFrontData = () => {
   const boardSrc =
     document
       .querySelector<HTMLDivElement>("#front-board-src")
@@ -36,9 +36,22 @@ const getData = () => {
   return parseData(boardSrc, nextSrc, window.DEFAULT_CELL as AbstractCell);
 };
 
-const materializeRandom = (data: AbstractData) => {
+const getBackData = () => {
+  const boardSrc =
+    document
+      .querySelector<HTMLDivElement>("#back-board-src")
+      ?.innerHTML.replaceAll("<br>", "\n") ?? "";
+  const nextSrc =
+    document
+      .querySelector<HTMLDivElement>("#back-next-src")
+      ?.innerHTML.replaceAll("<br>", "\n") ?? "";
+
+  return parseData(boardSrc, nextSrc, window.DEFAULT_CELL as AbstractCell);
+};
+
+const materializeRandom = (front: AbstractData, back: AbstractData) => {
   return materializeDataRandom(
-    data,
+    [front, back],
     tagMapFromObj(FIXED_CELLS),
     new Set(RANDOM_TAGS)
   );
@@ -57,11 +70,14 @@ export const draw = (data: MaterialData) => {
 };
 
 const main = () => {
-  const data = getData();
-  const [materialData, materialMap] = materializeRandom(data);
+  const front = getFrontData();
+  const back = getBackData();
+  const [[frontMaterialData, backMaterialData], materialMap] =
+    materializeRandom(front, back);
   window.materialMap = materialMap;
-  window.materialData = materialData;
-  draw(materialData);
+  window.frontMaterialData = frontMaterialData;
+  window.backMaterialData = backMaterialData;
+  draw(frontMaterialData);
 };
 
 main();

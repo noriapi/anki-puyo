@@ -4,7 +4,8 @@ declare global {
   interface Window {
     RANDOM_TAGS: string[];
     DEFAULT_CELL: string;
-    materialData: MaterialData;
+    frontMaterialData: MaterialData;
+    backMaterialData: MaterialData;
     materialMap: TagMap;
   }
 }

@@ -196,7 +196,7 @@ describe("materializeDataRandom", () => {
       [cell("X"), "gray"],
     ]);
 
-    const [matData] = materializeDataRandom(data, map, new Set());
+    const [[matData]] = materializeDataRandom([data], map, new Set());
 
     data.board.forEach((row, rowIdx) => {
       row.forEach((cell, colIdx) => {

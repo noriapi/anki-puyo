@@ -149,19 +149,19 @@ const materializeRandom = (
 };
 
 export const materializeDataRandom = (
-  data: AbstractData,
+  datas: AbstractData[],
   fixed_cells: TagMap,
   random_options: Set<string>
 ) => {
-  const cells = cellsSet(data);
+  const cells = new Set(datas.map((data) => Array.from(cellsSet(data))).flat());
+
   const materialMap = materializeRandom(cells, fixed_cells, random_options);
 
-  const materialData: MaterialData = mapData(
-    data,
-    (cell) => materialMap.get(cell)!
+  const materialDatas: MaterialData[] = datas.map((data) =>
+    mapData(data, (cell) => materialMap.get(cell)!)
   );
 
-  return [materialData, materialMap] as const;
+  return [materialDatas, materialMap] as const;
 };
 
 const setCell = (cell: HTMLTableCellElement, value: string) => {
