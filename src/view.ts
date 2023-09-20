@@ -38,10 +38,13 @@ export const parseNext = (s: string, defaultCell: AbstractCell) => {
   return next;
 };
 
-export const parseNextList = (s: string, defaultCell: AbstractCell) => {
+export const parseNextList = (
+  s: string,
+  defaultCell: AbstractCell
+): Next<AbstractCell>[] => {
   const twos = s.replace(/[\r\n]/gm, "").match(/.{1,2}/g);
 
-  return twos?.map((two) => parseNext(two, defaultCell));
+  return twos?.map((two) => parseNext(two, defaultCell)) ?? [];
 };
 
 const parseRow = (s: string, defaultCell: AbstractCell) => {
