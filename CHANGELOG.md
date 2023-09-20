@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.1](https://github.com/noriapi/anki-puyo/compare/v0.3.0...v0.3.1) (2023-09-20)
+
+
+### Bug Fixes
+
+* **view:** parseNextList が改行を無視するよう修正 ([#14](https://github.com/noriapi/anki-puyo/issues/14)) ([7aead20](https://github.com/noriapi/anki-puyo/commit/7aead20097148381b83e5c40d18833ea812d0d0e))
+
 ## [0.3.0](https://github.com/noriapi/anki-puyo/compare/v0.2.0...v0.3.0) (2023-09-20)
 
 
