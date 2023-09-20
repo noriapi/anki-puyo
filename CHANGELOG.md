@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.3.0](https://github.com/noriapi/anki-puyo/compare/v0.2.0...v0.3.0) (2023-09-20)
+
+
+### Features
+
+* **style:** メッセージのスタイルを変更 ([#12](https://github.com/noriapi/anki-puyo/issues/12)) ([2dc82e7](https://github.com/noriapi/anki-puyo/commit/2dc82e7f6bbef3c59d1263321c508942fd736f58))
+
+
+### Bug Fixes
+
+* **back:** FrontMsg の属性が欠けている問題を修正 ([#10](https://github.com/noriapi/anki-puyo/issues/10)) ([8a34ef9](https://github.com/noriapi/anki-puyo/commit/8a34ef915ea746e85b9a958e313637eedebfdb84))
+
 ## [0.2.0](https://github.com/noriapi/anki-puyo/compare/v0.1.0...v0.2.0) (2023-09-20)
 
 
