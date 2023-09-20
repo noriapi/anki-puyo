@@ -38,6 +38,12 @@ export const parseNext = (s: string, defaultCell: AbstractCell) => {
   return next;
 };
 
+export const parseNextList = (s: string, defaultCell: AbstractCell) => {
+  const twos = s.match(/.{2}/g);
+
+  return twos?.map((two) => parseNext(two, defaultCell)) ?? [];
+};
+
 const parseRow = (s: string, defaultCell: AbstractCell) => {
   const row = makeRow(defaultCell);
 
@@ -65,14 +71,12 @@ export const parseBoard = (s: string, defaultCell: AbstractCell) => {
 
 export type Data<T> = {
   board: Board<T>;
-  next1: Next<T>;
-  next2: Next<T>;
+  nexts: Next<T>[];
 };
 
 const mapData = <T, U>(data: Data<T>, fn: (cell: T) => U): Data<U> => ({
   board: mapFArray(data.board, (row) => mapFArray(row, fn)),
-  next1: mapFArray(data.next1, fn),
-  next2: mapFArray(data.next2, fn),
+  nexts: data.nexts.map((next) => mapFArray(next, fn)),
 });
 
 export type AbstractData = Data<AbstractCell>;
@@ -83,18 +87,14 @@ export const parseData = (
   nextSrc: string,
   defaultCell: AbstractCell
 ): AbstractData => {
-  const next1Src = nextSrc.slice(0, 2);
-  const next2Src = nextSrc.slice(2, undefined);
-
   return {
     board: parseBoard(boardSrc, defaultCell),
-    next1: parseNext(next1Src, defaultCell),
-    next2: parseNext(next2Src, defaultCell),
+    nexts: parseNextList(nextSrc, defaultCell),
   };
 };
 
 export const cellsSet = <T>(data: Data<T>): Set<T> =>
-  new Set([data.board.flat(), data.next1, data.next2].flat());
+  new Set([data.board.flat(), data.nexts.flat()].flat());
 
 const shuffle = (array: any[]) => {
   for (let i = array.length - 1; i > 0; i--) {
@@ -180,12 +180,12 @@ export const drawMaterial = (
     });
   });
 
-  data.next1.forEach((material, num) => {
+  data.nexts[0]?.forEach((material, num) => {
     const cell = getCell.next1(num);
     setCell(cell, material);
   });
 
-  data.next2.forEach((material, num) => {
+  data.nexts[1]?.forEach((material, num) => {
     const cell = getCell.next2(num);
     setCell(cell, material);
   });
