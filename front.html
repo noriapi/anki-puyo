@@ -129,11 +129,16 @@
     </tr>
   </table>
 
-  <div id="front-msg" class="front msg">{{FrontMsg}}</div>
+  <div id="front-msg" class="front msg"></div>
 </div>
 
-<div id="front-board-src" class="front src">{{FrontBoard}}</div>
-<div id="front-next-src" class="front src">{{FrontNext}}</div>
-<div id="back-board-src" class="back src">{{BackBoard}}</div>
-<div id="back-next-src" class="back src">{{BackNext}}</div>
+<div class="src">
+  <div id="front-board-src" class="front src">{{FrontBoard}}</div>
+  <div id="front-next-src" class="front src">{{FrontNext}}</div>
+  <div id="front-msg-src" class="front src">{{FrontMsg}}</div>
+  <div id="back-board-src" class="back src">{{BackBoard}}</div>
+  <div id="back-next-src" class="back src">{{BackNext}}</div>
+  <div id="back-msg-src" class="back src">{{BackMsg}}</div>
+</div>
+
 <script type="module" src="/src/front.ts"></script>

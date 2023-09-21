@@ -1,36 +1,35 @@
-import { drawMaterial } from "./view";
+import { AnkiPuyo, Board, Next, drawBoard, drawNext } from "./view";
 
-const drawFront = () => {
-  const data = window.frontMaterialData;
-
-  const boardEl = document.querySelector<HTMLTableElement>("#front-board")!;
-  const next1El = document.querySelector<HTMLTableElement>("#front-next1")!;
-  const next2El = document.querySelector<HTMLTableElement>("#front-next2")!;
-
-  drawMaterial(data, {
-    board: (col, row) => boardEl.rows[row].cells[col],
-    next1: (num) => next1El.rows[num].cells[0],
-    next2: (num) => next2El.rows[num].cells[0],
-  });
+const drawBackBoard = (board: Board<string>) => {
+  const table = document.querySelector<HTMLTableElement>("#back-board")!;
+  drawBoard(board, table);
 };
 
-const drawBack = () => {
-  const data = window.backMaterialData;
+const drawBackNext = (index: number, next: Next<string>) => {
+  const table = document.querySelector<HTMLTableElement>(
+    `#back-next${index + 1}`
+  );
+  if (table) drawNext(next, table);
+};
 
-  const boardEl = document.querySelector<HTMLTableElement>("#back-board")!;
-  const next1El = document.querySelector<HTMLTableElement>("#back-next1")!;
-  const next2El = document.querySelector<HTMLTableElement>("#back-next2")!;
+const setBackMsgHtml = (html: string) => {
+  const el = document.querySelector<HTMLDivElement>("#back-msg")!;
+  el.innerHTML = html;
+};
 
-  drawMaterial(data, {
-    board: (col, row) => boardEl.rows[row].cells[col],
-    next1: (num) => next1El.rows[num].cells[0],
-    next2: (num) => next2El.rows[num].cells[0],
+const drawAnkiPuyo = (ankiPuyo: AnkiPuyo) => {
+  drawBackBoard(ankiPuyo.realBackBoard);
+  ankiPuyo.realBackNextList.forEach((next, index) => {
+    drawBackNext(index, next);
   });
+  setBackMsgHtml(ankiPuyo.realBackMsgHtml);
 };
 
 const main = () => {
-  drawFront();
-  drawBack();
+  const ankiPuyo = window.AnkiPuyo;
+  if (ankiPuyo) {
+    drawAnkiPuyo(ankiPuyo);
+  }
 };
 
 main();

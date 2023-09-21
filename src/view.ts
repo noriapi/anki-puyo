@@ -24,9 +24,15 @@ export type Board<T> = FixedLengthArray<Row<T>, 12>;
 
 const makeBoard = <T>(value: T): Board<T> => fArray(() => makeRow(value), 12);
 
+export const mapBoard = <T, U>(board: Board<T>, fn: (cell: T) => U): Board<U> =>
+  mapFArray(board, (row) => mapFArray(row, fn));
+
 export type Next<T> = FixedLengthArray<T, 2>;
 
 const makeNext = <T>(value: T): Next<T> => fArray(() => value, 2);
+
+export const mapNext = <T, U>(next: Next<T>, fn: (cell: T) => U): Next<U> =>
+  mapFArray(next, fn);
 
 export const parseNext = (s: string, defaultCell: AbstractCell) => {
   const next = makeNext(defaultCell);
@@ -72,33 +78,6 @@ export const parseBoard = (s: string, defaultCell: AbstractCell) => {
   return board;
 };
 
-export type Data<T> = {
-  board: Board<T>;
-  nexts: Next<T>[];
-};
-
-const mapData = <T, U>(data: Data<T>, fn: (cell: T) => U): Data<U> => ({
-  board: mapFArray(data.board, (row) => mapFArray(row, fn)),
-  nexts: data.nexts.map((next) => mapFArray(next, fn)),
-});
-
-export type AbstractData = Data<AbstractCell>;
-export type MaterialData = Data<string>;
-
-export const parseData = (
-  boardSrc: string,
-  nextSrc: string,
-  defaultCell: AbstractCell
-): AbstractData => {
-  return {
-    board: parseBoard(boardSrc, defaultCell),
-    nexts: parseNextList(nextSrc, defaultCell),
-  };
-};
-
-export const cellsSet = <T>(data: Data<T>): Set<T> =>
-  new Set([data.board.flat(), data.nexts.flat()].flat());
-
 const shuffle = (array: any[]) => {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -138,7 +117,7 @@ export const tagMapFromObj = (obj: Record<string, AbstractCell[]>) =>
     )
   );
 
-const materializeRandom = (
+export const materializeRandom = (
   cells: Set<AbstractCell>,
   fixed_cells: TagMap,
   random_options: Set<string>
@@ -148,48 +127,47 @@ const materializeRandom = (
   return new Map([...fixed_cells, ...colorMap]);
 };
 
-export const materializeDataRandom = (
-  datas: AbstractData[],
-  fixed_cells: TagMap,
-  random_options: Set<string>
-) => {
-  const cells = new Set(datas.map((data) => Array.from(cellsSet(data))).flat());
-
-  const materialMap = materializeRandom(cells, fixed_cells, random_options);
-
-  const materialDatas: MaterialData[] = datas.map((data) =>
-    mapData(data, (cell) => materialMap.get(cell)!)
-  );
-
-  return [materialDatas, materialMap] as const;
-};
-
 const setCell = (cell: HTMLTableCellElement, value: string) => {
   cell.setAttribute("class", value);
 };
 
-export const drawMaterial = (
-  data: MaterialData,
-  getCell: {
-    board: (col: number, row: number) => HTMLTableCellElement;
-    next1: (num: number) => HTMLTableCellElement;
-    next2: (num: number) => HTMLTableCellElement;
-  }
-) => {
-  data.board.forEach((row, rowNum) => {
+export const drawBoard = (board: Board<string>, table: HTMLTableElement) => {
+  board.forEach((row, rowNum) => {
     row.forEach((material, colNum) => {
-      const cell = getCell.board(colNum, rowNum);
+      const cell = table.rows[rowNum].cells[colNum];
       setCell(cell, material);
     });
   });
+};
 
-  data.nexts[0]?.forEach((material, num) => {
-    const cell = getCell.next1(num);
-    setCell(cell, material);
-  });
-
-  data.nexts[1]?.forEach((material, num) => {
-    const cell = getCell.next2(num);
+export const drawNext = (next: Next<string>, table: HTMLTableElement) => {
+  next.forEach((material, num) => {
+    const cell = table.rows[num].cells[0];
     setCell(cell, material);
   });
 };
+
+const MSG_CELL_RE = /\{\{\s*(\S)\s*\}\}/gm;
+
+export const extractMsgCells = (msg: string) => {
+  return Array.from(
+    msg.matchAll(MSG_CELL_RE),
+    (match) => match[1] as AbstractCell
+  );
+};
+
+export const replaceMsgCells = (
+  msg: string,
+  map: (cell: AbstractCell, original: string) => string
+) => {
+  return msg.replaceAll(MSG_CELL_RE, (match, cell) => map(cell, match));
+};
+
+export interface AnkiPuyo {
+  realFrontBoard: Board<string>;
+  realFrontNextList: Next<string>[];
+  realFrontMsgHtml: string;
+  realBackBoard: Board<string>;
+  realBackNextList: Next<string>[];
+  realBackMsgHtml: string;
+}
