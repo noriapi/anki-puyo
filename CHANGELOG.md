@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0](https://github.com/noriapi/anki-puyo/compare/v0.4.0...v0.5.0) (2023-09-21)
+
+
+### Features
+
+* **view:** メッセージ内でぷよを表示する機能を追加 ([#27](https://github.com/noriapi/anki-puyo/issues/27)) ([eebc8bf](https://github.com/noriapi/anki-puyo/commit/eebc8bf4b7df42e411224b426f4069107b37ab8e))
+
 ## [0.4.0](https://github.com/noriapi/anki-puyo/compare/v0.3.2...v0.4.0) (2023-09-20)
 
 
