@@ -1,15 +1,14 @@
 import { describe, expect, test } from "vitest";
 import {
   AbstractCell,
-  AbstractData,
   Board,
   TagMap,
-  cellsSet,
   filterRestCells,
-  materializeDataRandom,
+  extractMsgCells,
   parseBoard,
   parseNext,
   parseNextList,
+  replaceMsgCells,
 } from "../src/view";
 import { FixedLengthArray } from "type-fest";
 
@@ -138,28 +137,6 @@ AACAAB`,
   });
 });
 
-test("cellsSet", () => {
-  const data: AbstractData = {
-    board: board([
-      [" ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " "],
-      ["C", "_", "_", "_", "_", "_"],
-      ["B", "A", "C", "X", "A", "X"],
-      ["B", "B", "A", "C", "C", "A"],
-      ["A", "A", "C", "A", "A", "B"],
-    ]),
-    nexts: [cells(["A", "A"]), cells(["B", "_"])],
-  };
-  const set = cellsSet(data);
-  expect(set).toStrictEqual(new Set(["A", "B", "C", "X", " ", "_"]));
-});
-
 test("filterRestCells", () => {
   const set = new Set(cells(["A", "B", "C", "X", " ", "_"]));
   const map: TagMap = new Map([
@@ -171,40 +148,19 @@ test("filterRestCells", () => {
   expect(filterRestCells(set, map)).toStrictEqual(new Set(["A", "B", "C"]));
 });
 
-describe("materializeDataRandom", () => {
-  test("no map", () => {
-    const data: AbstractData = {
-      board: board([
-        [" ", " ", " ", " ", " ", " "],
-        [" ", " ", " ", " ", " ", " "],
-        [" ", " ", " ", " ", " ", " "],
-        [" ", " ", " ", " ", " ", " "],
-        [" ", " ", " ", " ", " ", " "],
-        [" ", " ", " ", " ", " ", " "],
-        [" ", " ", " ", " ", " ", " "],
-        [" ", " ", " ", " ", " ", " "],
-        ["C", "_", "_", "_", "_", "_"],
-        ["B", "A", "C", "X", "A", "X"],
-        ["B", "B", "A", "C", "C", "A"],
-        ["A", "A", "C", "A", "A", "B"],
-      ]),
-      nexts: [cells(["A", "A"]), cells(["B", "_"])],
-    };
-    const map: TagMap = new Map([
-      [cell(" "), "empty"],
-      [cell("_"), "empty"],
-      [cell("X"), "gray"],
-    ]);
+test("extractMsgCells", () => {
+  expect(extractMsgCells("abc{{A}}def{{ B }}")).toStrictEqual(["A", "B"]);
+});
 
-    const [[matData]] = materializeDataRandom([data], map, new Set());
-
-    data.board.forEach((row, rowIdx) => {
-      row.forEach((cell, colIdx) => {
-        const expectedMat = map.get(cell);
-        if (typeof expectedMat === "string") {
-          expect(matData.board[rowIdx][colIdx]).toBe(expectedMat);
-        }
-      });
-    });
-  });
+test("replaceMsgCells", () => {
+  const map = new Map([
+    [cell("A"), "X"],
+    [cell("C"), "Z"],
+  ]);
+  expect(
+    replaceMsgCells(
+      "abc{{A}}def{{ B }}ghi{{ C }}",
+      (cell, original) => map.get(cell) ?? original
+    )
+  ).toBe("abcXdef{{ B }}ghiZ");
 });

@@ -1,10 +1,17 @@
 import {
   AbstractCell,
-  AbstractData,
-  MaterialData,
-  drawMaterial,
-  materializeDataRandom,
-  parseData,
+  AnkiPuyo,
+  Board,
+  Next,
+  drawBoard,
+  drawNext,
+  extractMsgCells,
+  mapBoard,
+  mapNext,
+  materializeRandom,
+  parseBoard,
+  parseNextList,
+  replaceMsgCells,
   tagMapFromObj,
 } from "./view";
 
@@ -18,66 +25,144 @@ const FIXED_CELLS = {
 const RANDOM_TAGS = ["red", "yellow", "green", "blue", "purple"];
 
 //! 未指定のセルにあてがう文字
-const DEFAULT_CELL = " ";
+const DEFAULT_CELL = " " as AbstractCell;
 
-window.RANDOM_TAGS = RANDOM_TAGS;
-window.DEFAULT_CELL = DEFAULT_CELL;
-
-const getFrontData = () => {
-  const boardSrc =
+const getFrontBoard = () => {
+  const src =
     document
       .querySelector<HTMLDivElement>("#front-board-src")
       ?.innerHTML.replaceAll("<br>", "\n") ?? "";
-  const nextSrc =
+
+  return parseBoard(src, DEFAULT_CELL);
+};
+
+const getFrontNext = () => {
+  const src =
     document
       .querySelector<HTMLDivElement>("#front-next-src")
       ?.innerHTML.replaceAll("<br>", "\n") ?? "";
 
-  return parseData(boardSrc, nextSrc, window.DEFAULT_CELL as AbstractCell);
+  return parseNextList(src, DEFAULT_CELL);
 };
 
-const getBackData = () => {
-  const boardSrc =
+const getFrontMsgHtml = () => {
+  return (
+    document.querySelector<HTMLDivElement>("#front-msg-src")?.innerHTML ?? ""
+  );
+};
+
+const getBackBoard = () => {
+  const src =
     document
       .querySelector<HTMLDivElement>("#back-board-src")
       ?.innerHTML.replaceAll("<br>", "\n") ?? "";
-  const nextSrc =
+
+  return parseBoard(src, DEFAULT_CELL);
+};
+
+const getBackNext = () => {
+  const src =
     document
       .querySelector<HTMLDivElement>("#back-next-src")
       ?.innerHTML.replaceAll("<br>", "\n") ?? "";
 
-  return parseData(boardSrc, nextSrc, window.DEFAULT_CELL as AbstractCell);
+  return parseNextList(src, DEFAULT_CELL);
 };
 
-const materializeRandom = (front: AbstractData, back: AbstractData) => {
-  return materializeDataRandom(
-    [front, back],
-    tagMapFromObj(FIXED_CELLS),
-    new Set(RANDOM_TAGS)
+const getBackMsgHtml = () => {
+  return (
+    document.querySelector<HTMLDivElement>("#back-msg-src")?.innerHTML ?? ""
   );
 };
 
-export const draw = (data: MaterialData) => {
-  const boardEl = document.querySelector<HTMLTableElement>("#front-board")!;
-  const next1El = document.querySelector<HTMLTableElement>("#front-next1")!;
-  const next2El = document.querySelector<HTMLTableElement>("#front-next2")!;
+const drawFrontBoard = (board: Board<string>) => {
+  const table = document.querySelector<HTMLTableElement>("#front-board")!;
+  drawBoard(board, table);
+};
 
-  drawMaterial(data, {
-    board: (col, row) => boardEl.rows[row].cells[col],
-    next1: (num) => next1El.rows[num].cells[0],
-    next2: (num) => next2El.rows[num].cells[0],
+const drawFrontNext = (index: number, next: Next<string>) => {
+  const table = document.querySelector<HTMLTableElement>(
+    `#front-next${index + 1}`
+  );
+  if (table) drawNext(next, table);
+};
+
+const setFrontMsgHtml = (html: string) => {
+  const el = document.querySelector<HTMLDivElement>("#front-msg")!;
+  el.innerHTML = html;
+};
+
+const isBack = () => {
+  const el = document.querySelector("#back-view");
+  return Boolean(el);
+};
+
+const isFront = () => !isBack();
+
+const makeAnkiPuyo = (): AnkiPuyo => {
+  const frontBoard = getFrontBoard();
+  const frontNextList = getFrontNext();
+  const frontMsgHtml = getFrontMsgHtml();
+  const backBoard = getBackBoard();
+  const backNextList = getBackNext();
+  const backMsgHtml = getBackMsgHtml();
+
+  const cells = new Set([
+    ...frontBoard.flat(),
+    ...frontNextList.flat(),
+    ...extractMsgCells(frontMsgHtml),
+    ...backBoard.flat(),
+    ...backNextList.flat(),
+    ...extractMsgCells(backMsgHtml),
+  ]);
+
+  const map = materializeRandom(
+    cells,
+    tagMapFromObj(FIXED_CELLS),
+    new Set(RANDOM_TAGS)
+  );
+
+  const getTag = (cell: AbstractCell) => map.get(cell) ?? "";
+
+  const realFrontBoard = mapBoard(frontBoard, getTag);
+  const realFrontNextList = frontNextList.map((next) => mapNext(next, getTag));
+  const realBackBoard = mapBoard(backBoard, getTag);
+  const realBackNextList = backNextList.map((next) => mapNext(next, getTag));
+
+  const getHtml = (cell: AbstractCell, original: string) => {
+    const tag = map.get(cell);
+    return typeof tag !== "undefined"
+      ? `<span class="${tag}">　</span>`
+      : original;
+  };
+
+  const realFrontMsgHtml = replaceMsgCells(frontMsgHtml, getHtml);
+  const realBackMsgHtml = replaceMsgCells(backMsgHtml, getHtml);
+
+  return {
+    realFrontBoard,
+    realFrontNextList,
+    realBackBoard,
+    realBackNextList,
+    realFrontMsgHtml,
+    realBackMsgHtml,
+  };
+};
+
+const drawAnkiPuyo = (ankiPuyo: AnkiPuyo) => {
+  drawFrontBoard(ankiPuyo.realFrontBoard);
+  ankiPuyo.realFrontNextList.forEach((next, index) => {
+    drawFrontNext(index, next);
   });
+  setFrontMsgHtml(ankiPuyo.realFrontMsgHtml);
 };
 
 const main = () => {
-  const front = getFrontData();
-  const back = getBackData();
-  const [[frontMaterialData, backMaterialData], materialMap] =
-    materializeRandom(front, back);
-  window.materialMap = materialMap;
-  window.frontMaterialData = frontMaterialData;
-  window.backMaterialData = backMaterialData;
-  draw(frontMaterialData);
+  if (window.AnkiPuyo == null || isFront()) {
+    window.AnkiPuyo = makeAnkiPuyo();
+  }
+
+  drawAnkiPuyo(window.AnkiPuyo);
 };
 
 main();
