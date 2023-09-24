@@ -50,12 +50,13 @@
   flex: none;
 }
 
-.next1 {
-  border: solid 2px black;
+.nexts {
+  display: flex;
+  gap: 2px;
   flex: none;
 }
 
-.next2 {
+.next {
   border: solid 2px black;
   flex: none;
 }
