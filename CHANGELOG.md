@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.6.0](https://github.com/noriapi/anki-puyo/compare/v0.5.0...v0.6.0) (2023-09-24)
+
+
+### Features
+
+* **view:** ネクストの向きをランダム化 ([#32](https://github.com/noriapi/anki-puyo/issues/32)) ([f3b0992](https://github.com/noriapi/anki-puyo/commit/f3b09927833004a58449857899bca88a3a99488c)), closes [#21](https://github.com/noriapi/anki-puyo/issues/21)
+* **view:** 任意の数のネクストをサポート ([#30](https://github.com/noriapi/anki-puyo/issues/30)) ([abc741a](https://github.com/noriapi/anki-puyo/commit/abc741a90900b44a0ff70b5d0bb73a57928f6017)), closes [#29](https://github.com/noriapi/anki-puyo/issues/29)
+
 ## [0.5.0](https://github.com/noriapi/anki-puyo/compare/v0.4.0...v0.5.0) (2023-09-21)
 
 
