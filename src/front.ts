@@ -12,6 +12,7 @@ import {
   parseBoard,
   parseNextList,
   replaceMsgCells,
+  shuffle,
   tagMapFromObj,
 } from "./view";
 
@@ -159,6 +160,9 @@ const makeAnkiPuyo = (): AnkiPuyo => {
   const realFrontNextList = frontNextList.map((next) => mapNext(next, getTag));
   const realBackBoard = mapBoard(backBoard, getTag);
   const realBackNextList = backNextList.map((next) => mapNext(next, getTag));
+
+  realFrontNextList.forEach((next) => shuffle(next as any));
+  realBackNextList.forEach((next) => shuffle(next as any));
 
   const getHtml = (cell: AbstractCell, original: string) => {
     const tag = map.get(cell);
