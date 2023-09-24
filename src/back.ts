@@ -5,11 +5,42 @@ const drawBackBoard = (board: Board<string>) => {
   drawBoard(board, table);
 };
 
-const drawBackNext = (index: number, next: Next<string>) => {
-  const table = document.querySelector<HTMLTableElement>(
-    `#back-next${index + 1}`
+const getBackNextTable = (index: number): HTMLTableElement => {
+  const container = document.querySelector<HTMLDivElement>("back-nexts")!;
+
+  const table = container.querySelector<HTMLTableElement>(
+    `table:nth-child(${index + 1})`
   );
-  if (table) drawNext(next, table);
+
+  if (table) {
+    return table;
+  } else {
+    container.insertAdjacentHTML(
+      "beforeend",
+      `
+<table class="back next">
+  <tr>
+    <td></td>
+  </tr>
+
+  <tr>
+    <td></td>
+  </tr>
+</table>
+`
+    );
+
+    return getBackNextTable(index);
+  }
+};
+
+const drawBackNext = (index: number, next: Next<string>) => {
+  const table = getBackNextTable(index);
+  drawNext(next, table);
+};
+
+const drawBackNextList = (nexts: Next<string>[]) => {
+  nexts.forEach((next, index) => drawBackNext(index, next));
 };
 
 const setBackMsgHtml = (html: string) => {
@@ -19,9 +50,7 @@ const setBackMsgHtml = (html: string) => {
 
 const drawAnkiPuyo = (ankiPuyo: AnkiPuyo) => {
   drawBackBoard(ankiPuyo.realBackBoard);
-  ankiPuyo.realBackNextList.forEach((next, index) => {
-    drawBackNext(index, next);
-  });
+  drawBackNextList(ankiPuyo.realBackNextList);
   setBackMsgHtml(ankiPuyo.realBackMsgHtml);
 };
 

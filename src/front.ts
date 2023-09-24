@@ -80,11 +80,42 @@ const drawFrontBoard = (board: Board<string>) => {
   drawBoard(board, table);
 };
 
-const drawFrontNext = (index: number, next: Next<string>) => {
-  const table = document.querySelector<HTMLTableElement>(
-    `#front-next${index + 1}`
+const getFrontNextTable = (index: number): HTMLTableElement => {
+  const container = document.querySelector<HTMLDivElement>("#front-nexts")!;
+
+  const table = container.querySelector<HTMLTableElement>(
+    `table:nth-child(${index + 1})`
   );
-  if (table) drawNext(next, table);
+
+  if (table) {
+    return table;
+  } else {
+    container.insertAdjacentHTML(
+      "beforeend",
+      `
+<table class="front next">
+  <tr>
+    <td></td>
+  </tr>
+
+  <tr>
+    <td></td>
+  </tr>
+</table>
+`
+    );
+
+    return getFrontNextTable(index);
+  }
+};
+
+const drawFrontNext = (index: number, next: Next<string>) => {
+  const table = getFrontNextTable(index);
+  drawNext(next, table);
+};
+
+const drawFrontNextList = (nexts: Next<string>[]) => {
+  nexts.forEach((next, index) => drawFrontNext(index, next));
 };
 
 const setFrontMsgHtml = (html: string) => {
@@ -151,9 +182,7 @@ const makeAnkiPuyo = (): AnkiPuyo => {
 
 const drawAnkiPuyo = (ankiPuyo: AnkiPuyo) => {
   drawFrontBoard(ankiPuyo.realFrontBoard);
-  ankiPuyo.realFrontNextList.forEach((next, index) => {
-    drawFrontNext(index, next);
-  });
+  drawFrontNextList(ankiPuyo.realFrontNextList);
   setFrontMsgHtml(ankiPuyo.realFrontMsgHtml);
 };
 
