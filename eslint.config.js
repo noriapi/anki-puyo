@@ -17,6 +17,12 @@ const baseConfig = {
   rules: {
     "simple-import-sort/imports": "error",
     "simple-import-sort/exports": "error",
+    "no-irregular-whitespace": [
+      "error",
+      {
+        skipTemplates: true,
+      },
+    ],
   },
 };
 

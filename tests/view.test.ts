@@ -1,16 +1,17 @@
+import { FixedLengthArray } from "type-fest";
 import { describe, expect, test } from "vitest";
+
 import {
   AbstractCell,
   Board,
-  TagMap,
-  filterRestCells,
   extractMsgCells,
+  filterRestCells,
   parseBoard,
   parseNext,
   parseNextList,
   replaceMsgCells,
+  TagMap,
 } from "../src/view";
-import { FixedLengthArray } from "type-fest";
 
 const cell = (char: string) => char as AbstractCell;
 const cells = <T extends number>(cells: FixedLengthArray<string, T>) =>
@@ -65,7 +66,7 @@ describe("parseNextList", () => {
     "parseNextList($s, $defaultCell) -> $expected",
     ({ s, defaultCell, expected }) => {
       expect(parseNextList(s, defaultCell)).toStrictEqual(expected);
-    }
+    },
   );
 });
 
@@ -85,7 +86,7 @@ describe("parseBoard", () => {
         [" ", " ", " ", " ", " ", " "],
         [" ", " ", " ", " ", " ", " "],
         [" ", " ", " ", " ", " ", " "],
-      ])
+      ]),
     );
   });
 
@@ -104,7 +105,7 @@ describe("parseBoard", () => {
         [" ", " ", " ", " ", " ", " "],
         [" ", " ", " ", " ", " ", " "],
         ["A", " ", " ", " ", " ", " "],
-      ])
+      ]),
     );
   });
 
@@ -116,8 +117,8 @@ C
 BAC A
 BBACCA
 AACAAB`,
-        cell(" ")
-      )
+        cell(" "),
+      ),
     ).toStrictEqual(
       board([
         [" ", " ", " ", " ", " ", " "],
@@ -132,7 +133,7 @@ AACAAB`,
         ["B", "A", "C", " ", "A", " "],
         ["B", "B", "A", "C", "C", "A"],
         ["A", "A", "C", "A", "A", "B"],
-      ])
+      ]),
     );
   });
 });
@@ -160,7 +161,7 @@ test("replaceMsgCells", () => {
   expect(
     replaceMsgCells(
       "abc{{A}}def{{ B }}ghi{{ C }}",
-      (cell, original) => map.get(cell) ?? original
-    )
+      (cell, original) => map.get(cell) ?? original,
+    ),
   ).toBe("abcXdef{{ B }}ghiZ");
 });

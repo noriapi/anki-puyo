@@ -1,7 +1,7 @@
-import base from "./vite.config.base";
-
-import { mergeConfig } from "vite";
 import { resolve } from "path";
+import { mergeConfig } from "vite";
+
+import base from "./vite.config.base";
 
 export default mergeConfig(base, {
   build: {
