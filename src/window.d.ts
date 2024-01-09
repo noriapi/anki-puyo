@@ -1,4 +1,4 @@
-import { AbstractCell, AnkiPuyo, Board, MaterialData, TagMap } from "./view";
+import { AnkiPuyo } from "./view";
 
 declare global {
   interface Window {

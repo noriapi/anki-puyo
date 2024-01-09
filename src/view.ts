@@ -5,7 +5,7 @@ const fArray = <T, U extends number>(value: () => T, size: U) =>
 
 const mapFArray = <T, U, V extends number>(
   arr: FixedLengthArray<T, V>,
-  fn: (value: T) => U
+  fn: (value: T) => U,
 ): FixedLengthArray<U, V> => arr.map(fn) as unknown as FixedLengthArray<U, V>;
 
 interface AbstractCellBrand {
@@ -46,7 +46,7 @@ export const parseNext = (s: string, defaultCell: AbstractCell) => {
 
 export const parseNextList = (
   s: string,
-  defaultCell: AbstractCell
+  defaultCell: AbstractCell,
 ): Next<AbstractCell>[] => {
   const twos = s.replace(/[\r\n]/gm, "").match(/.{1,2}/g);
 
@@ -78,18 +78,19 @@ export const parseBoard = (s: string, defaultCell: AbstractCell) => {
   return board;
 };
 
-export const shuffle = (array: any[]) => {
+export function shuffle(array: any[]) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     [array[i], array[j]] = [array[j], array[i]];
   }
-};
+}
 
 export type TagMap = Map<AbstractCell, string>;
 
 const colorizeRandom = (
   cells: Set<AbstractCell>,
-  random_options: Set<string>
+  random_options: Set<string>,
 ): TagMap => {
   const optsSet = new Set(random_options);
   let additonalColorCount = 0;
@@ -104,23 +105,23 @@ const colorizeRandom = (
 
 export const filterRestCells = (
   cells: Set<AbstractCell>,
-  fixed_cells: TagMap
+  fixed_cells: TagMap,
 ): Set<AbstractCell> =>
   new Set(
-    Array.from(cells).flatMap((cell) => (fixed_cells.has(cell) ? [] : [cell]))
+    Array.from(cells).flatMap((cell) => (fixed_cells.has(cell) ? [] : [cell])),
   );
 
 export const tagMapFromObj = (obj: Record<string, AbstractCell[]>) =>
   new Map(
     Object.entries(obj).flatMap(([tag, cells]): [AbstractCell, string][] =>
-      cells.map((cell) => [cell, tag])
-    )
+      cells.map((cell) => [cell, tag]),
+    ),
   );
 
 export const materializeRandom = (
   cells: Set<AbstractCell>,
   fixed_cells: TagMap,
-  random_options: Set<string>
+  random_options: Set<string>,
 ): TagMap => {
   const restCells = filterRestCells(cells, fixed_cells);
   const colorMap = colorizeRandom(restCells, random_options);
@@ -152,15 +153,17 @@ const MSG_CELL_RE = /\{\{\s*(\S)\s*\}\}/gm;
 export const extractMsgCells = (msg: string) => {
   return Array.from(
     msg.matchAll(MSG_CELL_RE),
-    (match) => match[1] as AbstractCell
+    (match) => match[1] as AbstractCell,
   );
 };
 
 export const replaceMsgCells = (
   msg: string,
-  map: (cell: AbstractCell, original: string) => string
+  map: (cell: AbstractCell, original: string) => string,
 ) => {
-  return msg.replaceAll(MSG_CELL_RE, (match, cell) => map(cell, match));
+  return msg.replaceAll(MSG_CELL_RE, (match, cell: AbstractCell) =>
+    map(cell, match),
+  );
 };
 
 export interface AnkiPuyo {

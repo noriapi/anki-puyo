@@ -1,4 +1,4 @@
-import { AnkiPuyo, Board, Next, drawBoard, drawNext } from "./view";
+import { AnkiPuyo, Board, drawBoard, drawNext, Next } from "./view";
 
 const drawBackBoard = (board: Board<string>) => {
   const table = document.querySelector<HTMLTableElement>("#back-board")!;
@@ -9,7 +9,7 @@ const getBackNextTable = (index: number): HTMLTableElement => {
   const container = document.querySelector<HTMLDivElement>("back-nexts")!;
 
   const table = container.querySelector<HTMLTableElement>(
-    `table:nth-child(${index + 1})`
+    `table:nth-child(${index + 1})`,
   );
 
   if (table) {
@@ -27,7 +27,7 @@ const getBackNextTable = (index: number): HTMLTableElement => {
     <td></td>
   </tr>
 </table>
-`
+`,
     );
 
     return getBackNextTable(index);

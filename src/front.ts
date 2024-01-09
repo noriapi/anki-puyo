@@ -2,13 +2,13 @@ import {
   AbstractCell,
   AnkiPuyo,
   Board,
-  Next,
   drawBoard,
   drawNext,
   extractMsgCells,
   mapBoard,
   mapNext,
   materializeRandom,
+  Next,
   parseBoard,
   parseNextList,
   replaceMsgCells,
@@ -85,7 +85,7 @@ const getFrontNextTable = (index: number): HTMLTableElement => {
   const container = document.querySelector<HTMLDivElement>("#front-nexts")!;
 
   const table = container.querySelector<HTMLTableElement>(
-    `table:nth-child(${index + 1})`
+    `table:nth-child(${index + 1})`,
   );
 
   if (table) {
@@ -103,7 +103,7 @@ const getFrontNextTable = (index: number): HTMLTableElement => {
     <td></td>
   </tr>
 </table>
-`
+`,
     );
 
     return getFrontNextTable(index);
@@ -151,7 +151,7 @@ const makeAnkiPuyo = (): AnkiPuyo => {
   const map = materializeRandom(
     cells,
     tagMapFromObj(FIXED_CELLS),
-    new Set(RANDOM_TAGS)
+    new Set(RANDOM_TAGS),
   );
 
   const getTag = (cell: AbstractCell) => map.get(cell) ?? "";
@@ -161,8 +161,8 @@ const makeAnkiPuyo = (): AnkiPuyo => {
   const realBackBoard = mapBoard(backBoard, getTag);
   const realBackNextList = backNextList.map((next) => mapNext(next, getTag));
 
-  realFrontNextList.forEach((next) => shuffle(next as any));
-  realBackNextList.forEach((next) => shuffle(next as any));
+  realFrontNextList.forEach((next) => shuffle(next as unknown as string[]));
+  realBackNextList.forEach((next) => shuffle(next as unknown as string[]));
 
   const getHtml = (cell: AbstractCell, original: string) => {
     const tag = map.get(cell);
