@@ -23,7 +23,7 @@ jobs:
         if: ${{ steps.release.outputs.release_created }}
       - uses: actions/setup-node@v4
         with:
-          node-version: 16
+          node-version-file: "package.json"
         if: ${{ steps.release.outputs.release_created }}
       - uses: pnpm/action-setup@v2
         with:
