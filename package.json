@@ -26,7 +26,7 @@
     "globals": "^14.0.0",
     "prettier": "^3.3.3",
     "rimraf": "^5.0.10",
-    "type-fest": "^4.24.0",
+    "type-fest": "^4.25.0",
     "typescript": "^5.5.4",
     "vite": "^5.4.1",
     "vite-plugin-singlefile": "^2.0.2",
