@@ -33,8 +33,8 @@ importers:
         specifier: ^0.13.1
         version: 0.13.1(eslint@8.57.1)(typescript@5.7.2)
       globals:
-        specifier: ^14.0.0
-        version: 14.0.0
+        specifier: ^15.13.0
+        version: 15.13.0
       prettier:
         specifier: ^3.4.2
         version: 3.4.2
@@ -740,6 +740,10 @@ packages:
 
   globals@14.0.0:
     resolution: {integrity: sha512-oahGvuMGQlPw/ivIYBjVSrWAfWLBeku5tpPE2fOPLi+WHffIWbuh2tCjhyQhTBPMf5E9jDEH4FOmTYgYwbKwtQ==}
+    engines: {node: '>=18'}
+
+  globals@15.13.0:
+    resolution: {integrity: sha512-49TewVEz0UxZjr1WYYsWpPrhyC/B/pA8Bq0fUmet2n+eR7yn0IvNzNaoBwnK6mdkzcN+se7Ez9zUgULTz2QH4g==}
     engines: {node: '>=18'}
 
   globby@11.1.0:
@@ -1961,6 +1965,8 @@ snapshots:
       type-fest: 0.20.2
 
   globals@14.0.0: {}
+
+  globals@15.13.0: {}
 
   globby@11.1.0:
     dependencies:
