@@ -39,8 +39,8 @@ importers:
         specifier: ^3.5.3
         version: 3.5.3
       rimraf:
-        specifier: ^5.0.10
-        version: 5.0.10
+        specifier: ^6.0.1
+        version: 6.0.1
       type-fest:
         specifier: ^4.40.0
         version: 4.40.0
@@ -258,10 +258,6 @@ packages:
   '@nodelib/fs.walk@1.2.8':
     resolution: {integrity: sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg==}
     engines: {node: '>= 8'}
-
-  '@pkgjs/parseargs@0.11.0':
-    resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
-    engines: {node: '>=14'}
 
   '@rollup/rollup-android-arm-eabi@4.21.0':
     resolution: {integrity: sha512-WTWD8PfoSAJ+qL87lE7votj3syLavxunWhzCnx3XFxFiI/BA/r3X7MUM8dVrH8rb2r4AiO8jJsr3ZjdaftmnfA==}
@@ -725,9 +721,9 @@ packages:
     resolution: {integrity: sha512-XxwI8EOhVQgWp6iDL+3b0r86f4d6AX6zSU55HfB4ydCEuXLXc5FcYeOu+nnGftS4TEju/11rt4KJPTMgbfmv4A==}
     engines: {node: '>=10.13.0'}
 
-  glob@10.3.10:
-    resolution: {integrity: sha512-fa46+tv1Ak0UPK1TOy/pZrIybNNt4HCv7SDzwyfiOZkvZLEbjsZkJBPtDHVshZjbecAoAGSC20MjLDG/qr679g==}
-    engines: {node: '>=16 || 14 >=14.17'}
+  glob@11.0.1:
+    resolution: {integrity: sha512-zrQDm8XPnYEKawJScsnM0QzobJxlT/kHOOlRTio8IH/GrmxRE5fjllkzdaHclIuNjUQTJYH2xHNIGfdpJkDJUw==}
+    engines: {node: 20 || >=22}
     hasBin: true
 
   glob@7.2.3:
@@ -814,9 +810,9 @@ packages:
   isexe@2.0.0:
     resolution: {integrity: sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw==}
 
-  jackspeak@2.3.6:
-    resolution: {integrity: sha512-N3yCS/NegsOBokc8GAdM8UcmfsKiSS8cipheD/nivzr700H+nsMOxJjQnvwOcRYVuFkdH0wGUvW2WbXGmrZGbQ==}
-    engines: {node: '>=14'}
+  jackspeak@4.1.0:
+    resolution: {integrity: sha512-9DDdhb5j6cpeitCbvLO7n7J4IxnbM6hoF6O1g4HQ5TfhvvKN8ywDM7668ZhMHRqVmxqhps/F6syWK2KcPxYlkw==}
+    engines: {node: 20 || >=22}
 
   js-tokens@8.0.3:
     resolution: {integrity: sha512-UfJMcSJc+SEXEl9lH/VLHSZbThQyLpw1vLO1Lb+j4RWDvG3N2f7yj3PVQA3cmkTBNldJ9eFnM+xEXxHIXrYiJw==}
@@ -864,9 +860,9 @@ packages:
   loupe@2.3.7:
     resolution: {integrity: sha512-zSMINGVYkdpYSOBmLi0D1Uo7JU9nVdQKrHxC8eYlV+9YKK9WePqAlL7lSlorG/U2Fw1w0hTBmaa/jrQ3UbPHtA==}
 
-  lru-cache@10.0.1:
-    resolution: {integrity: sha512-IJ4uwUTi2qCccrioU6g9g/5rvvVl13bsdczUUcqbciD9iLr095yj8DQKdObriEvuNSx325N1rV1O0sJFszx75g==}
-    engines: {node: 14 || >=16.14}
+  lru-cache@11.1.0:
+    resolution: {integrity: sha512-QIXZUBJUx+2zHUdQujWejBkcD9+cs94tLn0+YL8UrCh+D5sCXZ4c7LaEH48pNwRY3MLDgqUFyhlCyjJPf1WP0A==}
+    engines: {node: 20 || >=22}
 
   lru-cache@6.0.0:
     resolution: {integrity: sha512-Jo6dJ04CmSjuznwJSS3pUeWmd/H0ffTlkXXgwZi+eq1UCmqQwCh+eLsYOYCwY991i2Fah4h1BEMCx4qThGbsiA==}
@@ -891,6 +887,10 @@ packages:
     resolution: {integrity: sha512-vqiC06CuhBTUdZH+RYl8sFrL096vA45Ok5ISO6sE/Mr1jRbGH4Csnhi8f3wKVl7x8mO4Au7Ir9D3Oyv1VYMFJw==}
     engines: {node: '>=12'}
 
+  minimatch@10.0.1:
+    resolution: {integrity: sha512-ethXTt3SGGR+95gudmqJ1eNhRO7eGEGIgYA9vnPatK4/etz2MEVDno5GMCibdMTuBMyElzIlgxMna3K94XDIDQ==}
+    engines: {node: 20 || >=22}
+
   minimatch@3.1.2:
     resolution: {integrity: sha512-J7p63hRiAjw1NDEww1W7i37+ByIrOWO5XQQAzZ3VOcL0PNybwpfmV/N05zFAzwQ9USyEcX6t3UO+K5aqBQOIHw==}
 
@@ -898,8 +898,8 @@ packages:
     resolution: {integrity: sha512-RHiac9mvaRw0x3AYRgDC1CxAP7HTcNrrECeA8YYJeWnpo+2Q5CegtZjaotWTWxDG3UeGA1coE05iH1mPjT/2mg==}
     engines: {node: '>=16 || 14 >=14.17'}
 
-  minipass@7.0.3:
-    resolution: {integrity: sha512-LhbbwCfz3vsb12j/WkWQPZfKTsgqIe1Nf/ti1pKjYESGLHIVjWU96G9/ljLH4F9mWNVhlQOm0VySdAWzf05dpg==}
+  minipass@7.1.2:
+    resolution: {integrity: sha512-qOOzS1cBTWYF4BH8fVePDBOO9iptMnGUEZwNc/cMWnTV2nVLZ7VoNWEPHkYczZA0pdoA7dl6e7FL659nX9S2aw==}
     engines: {node: '>=16 || 14 >=14.17'}
 
   mlly@1.4.2:
@@ -943,6 +943,9 @@ packages:
     resolution: {integrity: sha512-LaNjtRWUBY++zB5nE/NwcaoMylSPk+S+ZHNB1TzdbMJMny6dynpAGt7X/tl/QYq3TIeE6nxHppbo2LGymrG5Pw==}
     engines: {node: '>=10'}
 
+  package-json-from-dist@1.0.1:
+    resolution: {integrity: sha512-UEZIS3/by4OC8vL3P2dTXRETpebLI2NiI5vIrjaD/5UtrkFX/tNbwjTSRAGC/+7CAo2pIcBaRgWmcBBHcsaCIw==}
+
   parent-module@1.0.1:
     resolution: {integrity: sha512-GQ2EWRpQV8/o+Aw8YqtfZZPfNRWZYkbidE9k5rpl/hC3vtHHBfGm2Ifi6qWV+coDGkrUKZAxE3Lot5kcsRlh+g==}
     engines: {node: '>=6'}
@@ -963,9 +966,9 @@ packages:
     resolution: {integrity: sha512-haREypq7xkM7ErfgIyA0z+Bj4AGKlMSdlQE2jvJo6huWD1EdkKYV+G/T4nq0YEF2vgTT8kqMFKo1uHn950r4SQ==}
     engines: {node: '>=12'}
 
-  path-scurry@1.10.1:
-    resolution: {integrity: sha512-MkhCqzzBEpPvxxQ71Md0b1Kk51W01lrYvlMzSUaIzNsODdd7mqhiimSZlr+VegAz5Z6Vzt9Xg2ttE//XBhH3EQ==}
-    engines: {node: '>=16 || 14 >=14.17'}
+  path-scurry@2.0.0:
+    resolution: {integrity: sha512-ypGJsmGtdXUOeM5u93TyeIEfEhM6s+ljAhrk5vAvSx8uyY/02OvrZnA0YNGUrPXfpJMgI1ODd3nwz8Npx4O4cg==}
+    engines: {node: 20 || >=22}
 
   path-type@4.0.0:
     resolution: {integrity: sha512-gDKb8aZMDeD/tZWs9P6+q0J9Mwkdl6xMV8TjnGP3qJVJ06bdMgkbBlLU8IdfOsIsFz2BW1rNVT3XuNEl8zPAvw==}
@@ -1027,8 +1030,9 @@ packages:
     deprecated: Rimraf versions prior to v4 are no longer supported
     hasBin: true
 
-  rimraf@5.0.10:
-    resolution: {integrity: sha512-l0OE8wL34P4nJH/H2ffoaniAokM2qSmrtXHmlpvYr5AVVX8msAyW0l8NVJFDxlSK4u3Uh/f41cQheDVdnYijwQ==}
+  rimraf@6.0.1:
+    resolution: {integrity: sha512-9dkvaxAsk/xNXSJzMgFqqMCuFgt2+KsOFek3TMLfo8NCPfWpBmqwyNn5Y+NX56QUYfCtsyhF3ayiboEoUmJk/A==}
+    engines: {node: 20 || >=22}
     hasBin: true
 
   rollup@4.21.0:
@@ -1406,9 +1410,6 @@ snapshots:
     dependencies:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.16.0
-
-  '@pkgjs/parseargs@0.11.0':
-    optional: true
 
   '@rollup/rollup-android-arm-eabi@4.21.0':
     optional: true
@@ -1936,13 +1937,14 @@ snapshots:
     dependencies:
       is-glob: 4.0.3
 
-  glob@10.3.10:
+  glob@11.0.1:
     dependencies:
       foreground-child: 3.1.1
-      jackspeak: 2.3.6
-      minimatch: 9.0.3
-      minipass: 7.0.3
-      path-scurry: 1.10.1
+      jackspeak: 4.1.0
+      minimatch: 10.0.1
+      minipass: 7.1.2
+      package-json-from-dist: 1.0.1
+      path-scurry: 2.0.0
 
   glob@7.2.3:
     dependencies:
@@ -2014,11 +2016,9 @@ snapshots:
 
   isexe@2.0.0: {}
 
-  jackspeak@2.3.6:
+  jackspeak@4.1.0:
     dependencies:
       '@isaacs/cliui': 8.0.2
-    optionalDependencies:
-      '@pkgjs/parseargs': 0.11.0
 
   js-tokens@8.0.3: {}
 
@@ -2062,7 +2062,7 @@ snapshots:
     dependencies:
       get-func-name: 2.0.2
 
-  lru-cache@10.0.1: {}
+  lru-cache@11.1.0: {}
 
   lru-cache@6.0.0:
     dependencies:
@@ -2083,6 +2083,10 @@ snapshots:
 
   mimic-fn@4.0.0: {}
 
+  minimatch@10.0.1:
+    dependencies:
+      brace-expansion: 2.0.1
+
   minimatch@3.1.2:
     dependencies:
       brace-expansion: 1.1.11
@@ -2091,7 +2095,7 @@ snapshots:
     dependencies:
       brace-expansion: 2.0.1
 
-  minipass@7.0.3: {}
+  minipass@7.1.2: {}
 
   mlly@1.4.2:
     dependencies:
@@ -2139,6 +2143,8 @@ snapshots:
     dependencies:
       p-limit: 3.1.0
 
+  package-json-from-dist@1.0.1: {}
+
   parent-module@1.0.1:
     dependencies:
       callsites: 3.1.0
@@ -2151,10 +2157,10 @@ snapshots:
 
   path-key@4.0.0: {}
 
-  path-scurry@1.10.1:
+  path-scurry@2.0.0:
     dependencies:
-      lru-cache: 10.0.1
-      minipass: 7.0.3
+      lru-cache: 11.1.0
+      minipass: 7.1.2
 
   path-type@4.0.0: {}
 
@@ -2202,9 +2208,10 @@ snapshots:
     dependencies:
       glob: 7.2.3
 
-  rimraf@5.0.10:
+  rimraf@6.0.1:
     dependencies:
-      glob: 10.3.10
+      glob: 11.0.1
+      package-json-from-dist: 1.0.1
 
   rollup@4.21.0:
     dependencies:
