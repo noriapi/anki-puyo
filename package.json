@@ -24,7 +24,7 @@
     "eslint-plugin-simple-import-sort": "^12.1.1",
     "eslint-plugin-solid": "^0.13.1",
     "globals": "^14.0.0",
-    "prettier": "^3.6.1",
+    "prettier": "^3.6.2",
     "rimraf": "^5.0.10",
     "type-fest": "^4.41.0",
     "typescript": "^5.8.3",
