@@ -30,7 +30,7 @@
     "typescript": "^5.8.3",
     "vite": "^5.4.19",
     "vite-plugin-singlefile": "^2.2.0",
-    "vitest": "^1.6.1"
+    "vitest": "^3.2.4"
   },
   "volta": {
     "node": "20.19.3"
