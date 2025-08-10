@@ -26,7 +26,7 @@ jobs:
         if: ${{ steps.release.outputs.release_created }}
       - uses: pnpm/action-setup@v2
         with:
-          version: 8
+          version: 8.15.9
         if: ${{ steps.release.outputs.release_created }}
       - name: Install dependencies
         run: pnpm install
